@@ -200,8 +200,11 @@ class listener implements EventSubscriberInterface
 
 		$event['subject'] = $this->custom_subject;
 
+		$post_mode = isset($event['post_mode']) ? (string) $event['post_mode'] : '';
+		$is_topic_title_update = ($post_mode === 'post' || $post_mode === 'edit_topic' || $post_mode === 'edit_first_post');
+
 		$data = $event['data'];
-		$data['topic_title'] = ($this->custom_topic_title !== null && $this->custom_topic_title !== '')
+		$data['topic_title'] = (!$is_topic_title_update && $this->custom_topic_title !== null && $this->custom_topic_title !== '')
 			? $this->custom_topic_title
 			: $this->custom_subject;
 		$event['data'] = $data;

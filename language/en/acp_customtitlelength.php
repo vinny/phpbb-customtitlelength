@@ -36,5 +36,5 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, [
 	'MAX_TOPIC_TITLE_CHARS'			=> 'Maximum characters per topic title',
-	'MAX_TOPIC_TITLE_CHARS_EXPLAIN'	=> 'The number of characters allowed within a topic title (between 1 and 250). The default is 120.',
+	'MAX_TOPIC_TITLE_CHARS_EXPLAIN'	=> 'The number of characters allowed in a topic title (from 1 to 250; default is 120). Replies allow 4 extra characters for the “Re: ” prefix.',
 ]);

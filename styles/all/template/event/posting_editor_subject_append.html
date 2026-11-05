@@ -1,4 +1,7 @@
 {% if not S_PRIVMSGS and MAX_TOPIC_TITLE_LENGTH is defined %}
-	<span class="hidden" data-customtitlelength-target="#subject" data-customtitlelength-max="{{ (S_NEW_MESSAGE or S_LINK_FORUM) ? MAX_TOPIC_TITLE_LENGTH : MAX_REPLY_TITLE_LENGTH }}"></span>
-	{% INCLUDEJS '@vinny_customtitlelength/js/customtitlelength.js' %}
+	<span class="hidden" data-customtitlelength-target="#subject" data-customtitlelength-max="{{ ((S_NEW_MESSAGE or S_LINK_FORUM) ? MAX_TOPIC_TITLE_LENGTH : MAX_REPLY_TITLE_LENGTH)|e('html_attr') }}"></span>
+	{% if not definition.INCLUDED_CUSTOMTITLELENGTH_JS %}
+		{% INCLUDEJS '@vinny_customtitlelength/js/customtitlelength.js' %}
+		{% DEFINE INCLUDED_CUSTOMTITLELENGTH_JS = true %}
+	{% endif %}
 {% endif %}

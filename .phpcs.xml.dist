@@ -9,7 +9,6 @@
 	<arg value="p"/>
 
 	<!-- Paths to check -->
-	<file>ext.php</file>
 	<file>event</file>
 	<file>migrations</file>
 
@@ -19,6 +18,7 @@
 	<!-- Standard ruleset: phpBB uses a custom layout based on PSR2/PSR12 but with tabs -->
 	<rule ref="PSR12">
 		<exclude name="Generic.Files.LineLength"/>
+		<exclude name="PSR12.Files.FileHeader.SpacingAfterTagBlock"/>
 		<!-- We use tabs, so exclude PSR12 space indent rules -->
 		<exclude name="Generic.WhiteSpace.DisallowTabIndent"/>
 		<exclude name="PSR2.Classes.ClassDeclaration.OpenBraceNewLine"/>
