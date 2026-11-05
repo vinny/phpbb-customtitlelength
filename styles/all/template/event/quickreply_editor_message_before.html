@@ -1,0 +1,4 @@
+{% if MAX_REPLY_TITLE_LENGTH is defined %}
+	<span class="hidden" data-customtitlelength-target="#subject" data-customtitlelength-max="{{ MAX_REPLY_TITLE_LENGTH }}"></span>
+	{% INCLUDEJS '@vinny_customtitlelength/js/customtitlelength.js' %}
+{% endif %}

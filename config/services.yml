@@ -1,0 +1,9 @@
+services:
+    vinny.customtitlelength.listener:
+        class: vinny\customtitlelength\event\listener
+        arguments:
+            - '@config'
+            - '@language'
+            - '@template'
+        tags:
+            - { name: event.listener }

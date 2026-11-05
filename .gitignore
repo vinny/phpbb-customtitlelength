@@ -1,0 +1,25 @@
+# Dependencies
+/vendor/
+/node_modules/
+composer.lock
+
+# Build and Cache files
+phpunit.xml
+/tests/output/
+.phpunit.result.cache
+.phpcs-cache
+.eslintcache
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE & Editor settings
+.idea/
+.vscode/
+*.swp
+*.swo
