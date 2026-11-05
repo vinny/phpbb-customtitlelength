@@ -4,8 +4,6 @@ All notable changes to the Custom Topic Title Length extension will be documente
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
-
 ## [1.0.0] - 2026-11-04
 
 ### Added
@@ -22,6 +20,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Explicit integer clamping (`1` to `250`) and multi-byte safe `truncate_string()` enforcement within phpBB's 255-byte storage limit.
 - Strict `|e('html_attr')` Twig attribute escaping and decoupled jQuery handler without selector injection sinks.
 
-[Unreleased]: https://github.com/vinny/phpbb-customtitlelength/compare/1.0.0...HEAD
 [1.0.0]: https://github.com/vinny/phpbb-customtitlelength/releases/tag/1.0.0
-
