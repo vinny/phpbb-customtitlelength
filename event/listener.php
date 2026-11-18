@@ -83,7 +83,7 @@ class listener implements EventSubscriberInterface
 	}
 
 	/**
-	 * Add maximum topic title length setting to ACP Post settings.
+	 * Add maximum topic title length and character counter settings to ACP Post settings.
 	 *
 	 * @param \phpbb\event\data $event Event data
 	 * @return void
@@ -102,6 +102,12 @@ class listener implements EventSubscriberInterface
 				'lang'		=> 'MAX_TOPIC_TITLE_CHARS',
 				'validate'	=> 'int:' . self::MIN_CHARS . ':' . self::MAX_CHARS,
 				'type'		=> 'number:' . self::MIN_CHARS . ':' . self::MAX_CHARS,
+				'explain'	=> true,
+			],
+			'customtitlelength_show_counter' => [
+				'lang'		=> 'CUSTOMTITLELENGTH_SHOW_COUNTER',
+				'validate'	=> 'bool',
+				'type'		=> 'radio:yes_no',
 				'explain'	=> true,
 			],
 		];
@@ -125,8 +131,9 @@ class listener implements EventSubscriberInterface
 		$max_chars = $this->get_max_chars();
 
 		$this->template->assign_vars([
-			'MAX_TOPIC_TITLE_LENGTH'	=> $max_chars,
-			'MAX_REPLY_TITLE_LENGTH'	=> $max_chars + self::REPLY_PREFIX_LENGTH,
+			'MAX_TOPIC_TITLE_LENGTH'			=> $max_chars,
+			'MAX_REPLY_TITLE_LENGTH'			=> $max_chars + self::REPLY_PREFIX_LENGTH,
+			'S_CUSTOMTITLELENGTH_SHOW_COUNTER'	=> !empty($this->config['customtitlelength_show_counter']),
 		]);
 	}
 
@@ -139,7 +146,10 @@ class listener implements EventSubscriberInterface
 	 */
 	public function capture_subject_before_truncate($event)
 	{
-		$mode = $event['mode'];
+		$this->custom_subject = null;
+		$this->custom_topic_title = null;
+
+		$mode = (string) $event['mode'];
 		if ($mode === 'delete')
 		{
 			return;
@@ -150,12 +160,8 @@ class listener implements EventSubscriberInterface
 		$topic_title = isset($data['topic_title']) ? (string) $data['topic_title'] : '';
 
 		$max_chars = $this->get_max_chars();
-		$is_first_post = ($mode === 'post') || ($mode === 'edit' && (
-			(isset($data['topic_posts_approved'], $data['topic_posts_unapproved'], $data['topic_posts_softdeleted']) && ($data['topic_posts_approved'] + $data['topic_posts_unapproved'] + $data['topic_posts_softdeleted'] == 1)) ||
-			(isset($data['topic_first_post_id'], $data['post_id']) && (int) $data['topic_first_post_id'] === (int) $data['post_id'])
-		));
 
-		if ($is_first_post)
+		if ($this->is_first_post($mode, $data))
 		{
 			$this->custom_subject = truncate_string($subject, $max_chars, self::MAX_STORE_LENGTH, false);
 		}
@@ -225,5 +231,40 @@ class listener implements EventSubscriberInterface
 
 		$this->custom_subject = null;
 		$this->custom_topic_title = null;
+	}
+
+	/**
+	 * Determine whether the post being submitted is a new topic or the first post of a topic.
+	 *
+	 * @param string	$mode	Posting mode
+	 * @param array		$data	Post data array
+	 * @return bool
+	 */
+	protected function is_first_post($mode, array $data)
+	{
+		if ($mode === 'post')
+		{
+			return true;
+		}
+
+		if ($mode !== 'edit')
+		{
+			return false;
+		}
+
+		if (isset($data['topic_posts_approved'], $data['topic_posts_unapproved'], $data['topic_posts_softdeleted']))
+		{
+			$total_posts = (int) $data['topic_posts_approved']
+				+ (int) $data['topic_posts_unapproved']
+				+ (int) $data['topic_posts_softdeleted'];
+
+			if ($total_posts === 1)
+			{
+				return true;
+			}
+		}
+
+		return isset($data['topic_first_post_id'], $data['post_id'])
+			&& (int) $data['topic_first_post_id'] === (int) $data['post_id'];
 	}
 }
