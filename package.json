@@ -1,14 +1,17 @@
 {
     "name": "vinny-customtitlelength",
-    "version": "1.0.0",
-    "description": "Custom Topic Title Length extension for phpBB - JS Linting",
+    "version": "1.1.0",
+    "description": "Custom Topic Title Length extension for phpBB - JS and CSS Linting",
     "private": true,
     "scripts": {
-        "test": "npm run lint:js",
-        "lint": "npm run lint:js",
-        "lint:js": "npx --no-install eslint \"styles/**/*.js\""
+        "test": "npm run lint:js && npm run lint:css",
+        "lint": "npm run lint:js && npm run lint:css",
+        "lint:js": "npx --no-install eslint \"styles/**/*.js\"",
+        "lint:css": "npx --no-install stylelint \"styles/**/*.css\""
     },
     "devDependencies": {
-        "eslint": "^8.57.0"
+        "eslint": "^8.57.0",
+        "stylelint": "^16.0.0",
+        "stylelint-config-standard": "^36.0.0"
     }
 }

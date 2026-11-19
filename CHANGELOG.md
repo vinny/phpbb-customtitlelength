@@ -4,6 +4,23 @@ All notable changes to the Custom Topic Title Length extension will be documente
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-11-18
+
+### Added
+- Optional live character counter (`customtitlelength_show_counter`) displayed next to the subject input while typing, configurable in **ACP > Post settings** (enabled by default).
+- Subtle prosilver-compatible stylesheet (`styles/all/theme/customtitlelength.css`) with RTL-safe logical spacing and limit highlight styling.
+- Expanded PHPUnit test coverage for ACP config insertion, boundary clamping, first-post editing, `delete` mode state reset, and UTF-8/HTML entity truncation.
+
+### Changed
+- Modernized `styles/all/template/js/customtitlelength.js` to ES6 Vanilla JavaScript with zero jQuery dependency and form-scoped subject input lookup.
+- Replaced `class="hidden"` and unused `data-customtitlelength-target` attributes in template events with the native HTML5 `hidden` attribute.
+- Refactored first-post detection in `event/listener.php` into a dedicated `is_first_post()` helper with strict integer comparisons.
+- Updated `composer/installers` constraint to `~1.0 || ~2.0`.
+
+### Fixed
+- Removed ineffective `S_LINK_FORUM` top-level check from `posting_editor_subject_append.html`.
+- Added defensive state reset for `$custom_subject` and `$custom_topic_title` at the start of `capture_subject_before_truncate()`.
+
 ## [1.0.0] - 2026-11-04
 
 ### Added
@@ -20,4 +37,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Explicit integer clamping (`1` to `250`) and multi-byte safe `truncate_string()` enforcement within phpBB's 255-byte storage limit.
 - Strict `|e('html_attr')` Twig attribute escaping and decoupled jQuery handler without selector injection sinks.
 
+[1.1.0]: https://github.com/vinny/phpbb-customtitlelength/compare/1.0.0...1.1.0
 [1.0.0]: https://github.com/vinny/phpbb-customtitlelength/releases/tag/1.0.0

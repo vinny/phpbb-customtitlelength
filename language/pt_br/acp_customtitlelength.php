@@ -35,6 +35,8 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, [
-	'MAX_TOPIC_TITLE_CHARS'			=> 'Máximo de caracteres por título de tópico',
-	'MAX_TOPIC_TITLE_CHARS_EXPLAIN'	=> 'O número de caracteres permitidos no título de um tópico (de 1 a 250; o padrão é 120). As respostas permitem 4 caracteres extras para o prefixo “Re: ”.',
+	'MAX_TOPIC_TITLE_CHARS'					=> 'Máximo de caracteres por título de tópico',
+	'MAX_TOPIC_TITLE_CHARS_EXPLAIN'			=> 'O número de caracteres permitidos no título de um tópico (de 1 a 250; o padrão é 120). As respostas permitem 4 caracteres extras para o prefixo “Re: ”.',
+	'CUSTOMTITLELENGTH_SHOW_COUNTER'		=> 'Exibir contador de caracteres do título',
+	'CUSTOMTITLELENGTH_SHOW_COUNTER_EXPLAIN'=> 'Exibe um contador de caracteres em tempo real ao lado do campo de assunto durante a digitação.',
 ]);

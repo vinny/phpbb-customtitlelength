@@ -1,0 +1,13 @@
+.customtitlelength-counter {
+	display: inline-block;
+	margin-inline-start: 6px;
+	font-size: 0.9em;
+	color: #536482;
+	vertical-align: middle;
+	white-space: nowrap;
+}
+
+.customtitlelength-counter--limit {
+	color: #bc2a4d;
+	font-weight: 700;
+}

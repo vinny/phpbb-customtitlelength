@@ -18,7 +18,9 @@
 /.phpunit.result.cache export-ignore
 /.phpcs-cache export-ignore
 /.eslintcache export-ignore
+/.stylelintcache export-ignore
 /.eslintrc.json export-ignore
+/.stylelintrc.json export-ignore
 /.phpcs.xml.dist export-ignore
 /phpunit.xml.dist export-ignore
 /README.md export-ignore

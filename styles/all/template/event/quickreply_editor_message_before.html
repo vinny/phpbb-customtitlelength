@@ -1,5 +1,9 @@
 {% if MAX_REPLY_TITLE_LENGTH is defined %}
-	<span class="hidden" data-customtitlelength-target="#subject" data-customtitlelength-max="{{ MAX_REPLY_TITLE_LENGTH|e('html_attr') }}"></span>
+	<span hidden data-customtitlelength-max="{{ MAX_REPLY_TITLE_LENGTH|e('html_attr') }}" data-customtitlelength-counter="{{ S_CUSTOMTITLELENGTH_SHOW_COUNTER ? '1' : '0' }}"></span>
+	{% if S_CUSTOMTITLELENGTH_SHOW_COUNTER and not definition.INCLUDED_CUSTOMTITLELENGTH_CSS %}
+		{% INCLUDECSS '@vinny_customtitlelength/customtitlelength.css' %}
+		{% DEFINE INCLUDED_CUSTOMTITLELENGTH_CSS = true %}
+	{% endif %}
 	{% if not definition.INCLUDED_CUSTOMTITLELENGTH_JS %}
 		{% INCLUDEJS '@vinny_customtitlelength/js/customtitlelength.js' %}
 		{% DEFINE INCLUDED_CUSTOMTITLELENGTH_JS = true %}

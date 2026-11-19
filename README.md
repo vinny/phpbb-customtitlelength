@@ -5,6 +5,7 @@ A phpBB extension that lets board administrators change the maximum character li
 ## Features
 
 - **Custom character limit:** Set the maximum topic title length between 1 and 250 characters in **ACP > Post settings** (default: 120).
+- **Live character counter:** Optionally display a live character counter next to the subject input while typing.
 - **Reply prefix support:** Reserves 4 extra characters for the `Re: ` prefix in replies and quotes (up to 254 characters).
 - **Consistent form limits:** Updates the `maxlength` attribute in the full post editor, topic draft editor, Quick Reply, and the Moderator Control Panel topic split form.
 - **No schema changes:** Uses phpBB’s existing `VARCHAR(255)` columns (`topic_title`, `post_subject`, `topic_last_post_subject`, `forum_last_post_subject`, and `draft_subject`).
